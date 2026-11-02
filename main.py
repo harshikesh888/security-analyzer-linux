@@ -10,7 +10,7 @@ from monitors.user_monitor import get_users
 from monitors.cron_monitor import get_cron_jobs
 from monitors.system_monitor import get_system_stats
 
-from ai_engine import analyze
+from ai_engine import analyze, describe_backend
 
 # Collect data
 report = {
@@ -35,7 +35,12 @@ print(json.dumps(report, indent=4))
 print("\n" + "=" * 50)
 print("AI ANALYSIS")
 print("=" * 50)
+print(f"Backend: {describe_backend()}\n")
 
-analysis = analyze(report)
+try:
+    analysis = analyze(report)
+except Exception as exc:
+    print(f"[!] AI analysis failed: {exc}")
+    raise SystemExit(1)
 
 print(analysis)

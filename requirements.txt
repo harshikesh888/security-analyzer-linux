@@ -1,4 +1,2 @@
 psutil
 requests
-subprocess
-hashlib
